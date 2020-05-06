@@ -22,9 +22,9 @@ class StemmerEnglishPorter2Test extends PHPUnit_Framework_TestCase
   public function testStemmerProducesExpectedStems($word, $expected_stem)
   {
 
-    $objStemmer = New StemmerEnglishPorter2();
+    $stemmer = New StemmerEnglishPorter2();
 
-    $this->assertEquals($expected_stem, $stem = $objStemmer->stem($word), "Source word: " . $word);
+    $this->assertEquals($expected_stem, $stem = $stemmer->stem($word), "Source word: " . $word);
 
   }
 
@@ -32,7 +32,7 @@ class StemmerEnglishPorter2Test extends PHPUnit_Framework_TestCase
 
     require_once 'utility.php';
 
-    $arrStemData = array();
+    $stemData = array();
     $file_name = csTestSettings()['stem-data-path'] . 'EnglishPorter2Stems_modified.csv';
 
     // Note, the input data is in a file with UTF-16 LE format. Internally, php
@@ -43,13 +43,13 @@ class StemmerEnglishPorter2Test extends PHPUnit_Framework_TestCase
         $data = str_getcsv($buffer);
         if (substr(trim($data[0]), 0, 1) <> ";") {
           // Lines starting with ";" are comments.
-          $arrStemData[] = array($data[0], $data[1]);
+          $stemData[] = array($data[0], $data[1]);
         }
       }
       fclose($handle);
     }
 
-    return $arrStemData;
+    return $stemData;
   }
 
 }
